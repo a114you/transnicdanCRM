@@ -1,0 +1,927 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   THEME TOKENS
+   ============================================================ */
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-garage: var(--garage);
+  --color-garage-foreground: var(--garage-foreground);
+
+  /* Chart palette */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-sans: var(--font-ibm), system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", monospace;
+  --font-heading: var(--font-oswald), sans-serif;
+  --font-display: var(--font-bebas), sans-serif;
+
+  /* Border radius scale */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+/* ============================================================
+   LIGHT THEME — hex/rgba first (Chrome 100 / Win7-8 / old Edge)
+   oklch alone kills ALL colors on Chrome ≤110 (last Win7 builds)
+   ============================================================ */
+:root {
+  --background: #f8f7f4;
+  --foreground: #1a1a1a;
+
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+
+  --primary: #ff6b00;
+  --primary-foreground: #ffffff;
+  --primary-hover: #ff8533;
+
+  --secondary: #2d2d2d;
+  --secondary-foreground: #f8f7f4;
+
+  --muted: #e8e6e1;
+  --muted-foreground: #666666;
+
+  --accent: #ff6b00;
+  --accent-foreground: #ffffff;
+
+  --destructive: #dc2626;
+
+  --border: #d1cec7;
+  --input: #d1cec7;
+  --ring: #ff6b00;
+
+  --chart-1: #ff6b00;
+  --chart-2: #2d2d2d;
+  --chart-3: #666666;
+  --chart-4: #8a8a8a;
+  --chart-5: #c4c4c4;
+
+  --radius: 0.75rem;
+
+  --sidebar: #2d2d2d;
+  --sidebar-foreground: #f8f7f4;
+  --sidebar-primary: #ff6b00;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #3a3a3a;
+  --sidebar-accent-foreground: #f8f7f4;
+  --sidebar-border: #4a4a4a;
+  --sidebar-ring: #ff6b00;
+
+  --garage: #ff6b00;
+  --garage-foreground: #ffffff;
+
+  /* RGB channels for legacy alpha (used in fallbacks) */
+  --primary-rgb: 255, 107, 0;
+  --secondary-rgb: 45, 45, 45;
+  --foreground-rgb: 26, 26, 26;
+  --background-rgb: 248, 247, 244;
+  --card-rgb: 255, 255, 255;
+  --muted-rgb: 232, 230, 225;
+  --border-rgb: 209, 206, 199;
+  --destructive-rgb: 220, 38, 38;
+}
+
+/* ============================================================
+   DARK THEME — Night Shift (hex)
+   ============================================================ */
+.dark {
+  --background: #121212;
+  --foreground: #f0f0f0;
+
+  --card: #1e1e1e;
+  --card-foreground: #f0f0f0;
+  --popover: #1e1e1e;
+  --popover-foreground: #f0f0f0;
+
+  --primary: #ff8533;
+  --primary-foreground: #121212;
+  --primary-hover: #ff9a55;
+
+  --secondary: #2d2d2d;
+  --secondary-foreground: #f0f0f0;
+
+  --muted: #2a2a2a;
+  --muted-foreground: #a8a8a8;
+
+  --accent: #ff8533;
+  --accent-foreground: #121212;
+
+  --destructive: #ef4444;
+
+  --border: #333333;
+  --input: #333333;
+  --ring: #ff8533;
+
+  --chart-1: #ff8533;
+  --chart-2: #f0f0f0;
+  --chart-3: #a8a8a8;
+  --chart-4: #666666;
+  --chart-5: #444444;
+
+  --sidebar: #151515;
+  --sidebar-foreground: #f0f0f0;
+  --sidebar-primary: #ff8533;
+  --sidebar-primary-foreground: #121212;
+  --sidebar-accent: #2a2a2a;
+  --sidebar-accent-foreground: #f0f0f0;
+  --sidebar-border: #333333;
+  --sidebar-ring: #ff8533;
+
+  --garage: #ff8533;
+  --garage-foreground: #121212;
+
+  --primary-rgb: 255, 133, 51;
+  --secondary-rgb: 45, 45, 45;
+  --foreground-rgb: 240, 240, 240;
+  --background-rgb: 18, 18, 18;
+  --card-rgb: 30, 30, 30;
+  --muted-rgb: 42, 42, 42;
+  --border-rgb: 51, 51, 51;
+  --destructive-rgb: 239, 68, 68;
+}
+
+/* ============================================================
+   BASE LAYER
+   ============================================================ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    hanging-punctuation: first last;
+    /* solid base if CSS vars ever fail */
+    background-color: #f8f7f4;
+    color: #1a1a1a;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background-color: var(--background, #f8f7f4);
+    color: var(--foreground, #1a1a1a);
+  }
+
+  main {
+    min-width: 0;
+  }
+
+  [class*="tracking-"] {
+    letter-spacing: 0 !important;
+  }
+
+  /* Headings — Bold Industrial */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), "Segoe UI", system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  @supports (text-wrap: balance) {
+    h1, h2, h3, h4, h5, h6 {
+      text-wrap: balance;
+    }
+  }
+
+  h1 {
+    @apply text-2xl min-[390px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+    line-height: 1.1;
+  }
+
+  h2 {
+    @apply text-xl min-[390px]:text-2xl sm:text-3xl md:text-4xl;
+    line-height: 1.15;
+  }
+
+  h3 {
+    @apply text-xl sm:text-2xl md:text-3xl;
+    line-height: 1.2;
+  }
+
+  h4 {
+    @apply text-lg sm:text-xl md:text-2xl;
+    line-height: 1.25;
+  }
+
+  /* Paragraphs */
+  @supports (text-wrap: pretty) {
+    p {
+      text-wrap: pretty;
+    }
+  }
+
+  /* Focus — accessible ring (high contrast, no color-mix) */
+  :focus-visible {
+    outline: 2px solid var(--ring, #ff6b00);
+    outline-offset: 2px;
+  }
+
+  /* Remove focus ring for mouse users */
+  :focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(255, 107, 0, 0.28);
+    color: #1a1a1a;
+  }
+
+  .dark ::selection {
+    background: rgba(255, 133, 51, 0.35);
+    color: #f0f0f0;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Prevent img overflow */
+  img,
+  video,
+  svg {
+    @apply max-w-full h-auto block;
+  }
+}
+
+/* ============================================================
+   COMPONENTS LAYER
+   ============================================================ */
+@layer components {
+  /* --- Display & Readable Text --- */
+
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0;
+  }
+
+  .text-readable {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    text-wrap: pretty;
+  }
+
+  /* --- Cards --- */
+
+  .garage-card {
+    background-color: var(--card, #fff);
+    border: 1px solid var(--border, #d1cec7);
+    border-radius: 1rem;
+    transition: border-color 0.1s ease-out, background-color 0.1s ease-out;
+  }
+
+  @media (hover: hover) {
+    .garage-card:hover {
+      border-color: rgba(255, 107, 0, 0.45);
+    }
+  }
+
+  .glass-card {
+    /* solid first — no backdrop-filter / color-mix required */
+    background-color: var(--card, #fff);
+    border: 1px solid rgba(var(--border-rgb, 209, 206, 199), 0.7);
+    border-radius: 1rem;
+    transition: border-color 0.1s ease-out, background-color 0.1s ease-out;
+  }
+
+  @media (hover: hover) {
+    .glass-card:hover {
+      border-color: rgba(255, 107, 0, 0.45);
+    }
+  }
+
+  .garage-card-dark {
+    background-color: var(--card, #fff);
+    border: 1px solid rgba(var(--border-rgb, 209, 206, 199), 0.4);
+    border-radius: 1rem;
+  }
+
+  /* --- Buttons --- */
+
+  .btn-garage {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply px-6 py-3.5 font-semibold uppercase tracking-wider;
+    @apply text-primary-foreground rounded-xl;
+    @apply transition-colors duration-100 ease-out;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-hover) 100%
+    );
+  }
+
+  .btn-garage-secondary {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply px-6 py-3.5 font-semibold uppercase tracking-wider;
+    @apply bg-secondary text-secondary-foreground rounded-xl;
+    @apply border border-border/40;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+  }
+
+  /* Disabled state for buttons */
+  .btn-garage:disabled,
+  .btn-garage-secondary:disabled {
+    @apply opacity-50 pointer-events-none;
+  }
+
+  /* --- Status Badges --- */
+
+  .badge-status {
+    @apply inline-flex items-center px-3 py-1 text-xs font-bold uppercase tracking-wider;
+    @apply rounded-full border;
+    font-family: var(--font-heading);
+    white-space: nowrap;
+  }
+
+  /* --- Form Controls --- */
+
+  .input-garage {
+    @apply w-full h-12 px-4 text-base rounded-xl;
+    @apply bg-background/50 border border-input;
+    @apply transition-colors duration-100 ease-out;
+    @apply placeholder:text-muted-foreground/50;
+  }
+
+  .input-garage:focus {
+    @apply border-primary bg-background;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 255, 107, 0), 0.15);
+  }
+
+  .input-garage:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .label-garage {
+    @apply block text-sm font-semibold uppercase tracking-wider mb-2;
+    @apply text-foreground/80;
+    font-family: var(--font-heading);
+  }
+
+  /* --- Data Tables --- */
+
+  .table-garage {
+    @apply w-full text-left border-collapse;
+    min-width: max-content;
+  }
+
+  .table-garage th {
+    @apply px-4 py-3 text-xs font-bold uppercase tracking-widest;
+    @apply text-muted-foreground bg-muted/40 border-b border-border;
+    font-family: var(--font-heading);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .table-garage td {
+    @apply px-4 py-3 text-base border-b border-border/50;
+  }
+
+  .table-garage tbody tr {
+    @apply transition-colors duration-150;
+  }
+
+  @media (hover: hover) {
+    .table-garage tbody tr:hover {
+      @apply bg-muted/20;
+    }
+  }
+
+  /* --- Navigation --- */
+
+  .nav-active {
+    @apply relative text-primary font-semibold;
+  }
+
+  .nav-active::after {
+    content: "";
+    @apply absolute bottom-0 left-2 right-2 h-0.5 bg-primary rounded-full;
+  }
+
+  /* --- Price Display --- */
+
+  .price-display {
+    font-family: var(--font-display);
+    @apply text-2xl min-[390px]:text-3xl md:text-4xl font-extrabold;
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-hover) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* --- Section Divider --- */
+
+  .section-divider {
+    @apply h-0.5 w-16 rounded-full my-4;
+    background: linear-gradient(
+      90deg,
+      var(--primary, #ff6b00),
+      rgba(var(--primary-rgb, 255, 107, 0), 0.2)
+    );
+  }
+}
+
+/* ============================================================
+   UTILITIES LAYER
+   ============================================================ */
+@layer utilities {
+  /* Hide scrollbar utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .styled-scrollbar {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--primary-rgb, 255, 107, 0), 0.55) rgba(var(--muted-rgb, 232, 230, 225), 0.75);
+  }
+
+  .styled-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .styled-scrollbar::-webkit-scrollbar-track {
+    background: rgba(var(--muted-rgb, 232, 230, 225), 0.7);
+    border-radius: 9999px;
+  }
+
+  .styled-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(var(--primary-rgb, 255, 107, 0), 0.65);
+    border: 2px solid rgba(var(--card-rgb, 255, 255, 255), 0.8);
+    border-radius: 9999px;
+  }
+
+  .styled-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+
+  /* Safe area insets for iPhone notch / Dynamic Island */
+  .pt-safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pb-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pb-safe {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+
+  /* Mobile bottom nav shell */
+  .mobile-bottom-nav {
+    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark .mobile-bottom-nav {
+    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Prefer readable form controls on iOS (prevents auto-zoom on focus) */
+  @media (max-width: 1023px) {
+    input.mobile-text-base,
+    select.mobile-text-base,
+    textarea.mobile-text-base {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Entrance animations */
+  .animate-fade-in {
+    animation: fadeIn 0.08s ease-out both;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.08s ease-out both;
+  }
+
+  /* Text shadow */
+  .text-shadow-sm {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-garage {
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-hover) 100%
+    );
+  }
+
+  .bg-gradient-premium {
+    background: linear-gradient(135deg, #1e1e1e, #121212);
+  }
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================================
+   SCROLLBAR — Chromium & WebKit
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 9999px;
+  opacity: 0.4;
+  border: 2px solid var(--muted);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.6;
+}
+
+/* Keep scrolling on CRM pages cheap: no live backdrop rasterization. */
+header,
+nav,
+.glass-card,
+.garage-card,
+.garage-card-dark,
+.bg-popover,
+.bg-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted-foreground) var(--muted);
+}
+
+.overflow-x-auto,
+.overflow-auto {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--primary-rgb, 255, 107, 0), 0.55) rgba(var(--muted-rgb, 232, 230, 225), 0.65);
+}
+
+.glass-card,
+.garage-card,
+.garage-card-dark {
+  min-width: 0;
+}
+
+.overflow-x-auto::-webkit-scrollbar,
+.overflow-auto::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track,
+.overflow-auto::-webkit-scrollbar-track {
+  background: rgba(var(--muted-rgb, 232, 230, 225), 0.7);
+  border-radius: 9999px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb,
+.overflow-auto::-webkit-scrollbar-thumb {
+  background: rgba(var(--primary-rgb, 255, 107, 0), 0.65);
+  border: 1px solid rgba(var(--background-rgb, 248, 247, 244), 0.7);
+  border-radius: 9999px;
+}
+
+@media (max-width: 640px) {
+  .overflow-x-auto::-webkit-scrollbar,
+  .overflow-auto::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — Mobile-first overrides
+   ============================================================ */
+@media (max-width: 640px) {
+  .garage-card,
+  .glass-card,
+  .garage-card-dark {
+    @apply rounded-xl;
+  }
+
+  .btn-garage,
+  .btn-garage-secondary {
+    @apply w-full justify-center px-4 py-3;
+  }
+
+  .price-display {
+    @apply text-2xl;
+  }
+
+  .table-garage th,
+  .table-garage td {
+    @apply px-2.5 py-2 text-sm;
+  }
+}
+
+/* ============================================================
+   TYPOGRAPHY SCALE — Unified text sizes
+   ============================================================ */
+@layer components {
+  /* Field label — use instead of text-[10px] or arbitrary small sizes */
+  .text-label {
+    @apply text-xs text-muted-foreground uppercase font-bold tracking-wider;
+  }
+
+  /* Data value inside cards/detail views */
+  .text-data {
+    @apply text-sm font-semibold text-foreground;
+  }
+
+  /* Monospace data (plates, VIN, codes) */
+  .text-mono-data {
+    @apply font-mono text-sm text-foreground;
+  }
+
+  /* Table body default */
+  .table-data {
+    @apply text-sm text-foreground;
+  }
+
+  /* Table header */
+  .table-header {
+    @apply text-xs font-bold uppercase tracking-wider text-muted-foreground;
+  }
+}
+
+/* ============================================================
+   TOUCH DEVICES
+   ============================================================ */
+@media (hover: none) and (pointer: coarse) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 80ms !important;
+  }
+
+  .glass-card,
+  .garage-card-dark {
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-in {
+    animation: none !important;
+  }
+
+  /* Larger tap targets */
+  .btn-garage,
+  .btn-garage-secondary {
+    min-height: 48px;
+  }
+
+  .input-garage {
+    min-height: 48px;
+  }
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .garage-card,
+  .glass-card,
+  .garage-card-dark {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}
+
+/* ============================================================
+   LEGACY BROWSER SAFETY (Win7/8 + Chrome ≤110)
+   Solid rgba overrides when color-mix()/oklab fail silently.
+   Does not affect modern browsers (same visual).
+   ============================================================ */
+.bg-background { background-color: var(--background, #f8f7f4) !important; }
+.bg-foreground { background-color: var(--foreground, #1a1a1a) !important; }
+.bg-card { background-color: var(--card, #fff) !important; }
+.bg-popover { background-color: var(--popover, #fff) !important; }
+.bg-primary { background-color: var(--primary, #ff6b00) !important; }
+.bg-secondary { background-color: var(--secondary, #2d2d2d) !important; }
+.bg-muted { background-color: var(--muted, #e8e6e1) !important; }
+.bg-destructive { background-color: var(--destructive, #dc2626) !important; }
+.bg-accent { background-color: var(--accent, #ff6b00) !important; }
+
+.text-background { color: var(--background, #f8f7f4) !important; }
+.text-foreground { color: var(--foreground, #1a1a1a) !important; }
+.text-card-foreground { color: var(--card-foreground, #1a1a1a) !important; }
+.text-primary { color: var(--primary, #ff6b00) !important; }
+.text-primary-foreground { color: var(--primary-foreground, #fff) !important; }
+.text-secondary { color: var(--secondary, #2d2d2d) !important; }
+.text-secondary-foreground { color: var(--secondary-foreground, #f8f7f4) !important; }
+.text-muted-foreground { color: var(--muted-foreground, #666) !important; }
+.text-destructive { color: var(--destructive, #dc2626) !important; }
+.text-accent-foreground { color: var(--accent-foreground, #fff) !important; }
+
+.border-border { border-color: var(--border, #d1cec7) !important; }
+.border-input { border-color: var(--input, #d1cec7) !important; }
+.border-primary { border-color: var(--primary, #ff6b00) !important; }
+.border-destructive { border-color: var(--destructive, #dc2626) !important; }
+
+/* Common opacity utilities used across CRM chrome */
+.bg-primary\/5 { background-color: rgba(var(--primary-rgb, 255, 107, 0), 0.05) !important; }
+.bg-primary\/10 { background-color: rgba(var(--primary-rgb, 255, 107, 0), 0.1) !important; }
+.bg-primary\/12 { background-color: rgba(var(--primary-rgb, 255, 107, 0), 0.12) !important; }
+.bg-primary\/15 { background-color: rgba(var(--primary-rgb, 255, 107, 0), 0.15) !important; }
+.bg-primary\/20 { background-color: rgba(var(--primary-rgb, 255, 107, 0), 0.2) !important; }
+.bg-secondary\/5 { background-color: rgba(var(--secondary-rgb, 45, 45, 45), 0.05) !important; }
+.bg-secondary\/10 { background-color: rgba(var(--secondary-rgb, 45, 45, 45), 0.1) !important; }
+.bg-secondary\/15 { background-color: rgba(var(--secondary-rgb, 45, 45, 45), 0.15) !important; }
+.bg-secondary\/20 { background-color: rgba(var(--secondary-rgb, 45, 45, 45), 0.2) !important; }
+.bg-muted\/10 { background-color: rgba(var(--muted-rgb, 232, 230, 225), 0.1) !important; }
+.bg-muted\/20 { background-color: rgba(var(--muted-rgb, 232, 230, 225), 0.2) !important; }
+.bg-muted\/30 { background-color: rgba(var(--muted-rgb, 232, 230, 225), 0.3) !important; }
+.bg-muted\/40 { background-color: rgba(var(--muted-rgb, 232, 230, 225), 0.4) !important; }
+.bg-muted\/50 { background-color: rgba(var(--muted-rgb, 232, 230, 225), 0.5) !important; }
+.bg-destructive\/10 { background-color: rgba(var(--destructive-rgb, 220, 38, 38), 0.1) !important; }
+.bg-destructive\/5 { background-color: rgba(var(--destructive-rgb, 220, 38, 38), 0.05) !important; }
+.bg-background\/50 { background-color: rgba(var(--background-rgb, 248, 247, 244), 0.5) !important; }
+.bg-background\/80 { background-color: rgba(var(--background-rgb, 248, 247, 244), 0.8) !important; }
+.bg-background\/95 { background-color: rgba(var(--background-rgb, 248, 247, 244), 0.95) !important; }
+.bg-card\/95 { background-color: rgba(var(--card-rgb, 255, 255, 255), 0.95) !important; }
+
+.border-primary\/10 { border-color: rgba(var(--primary-rgb, 255, 107, 0), 0.1) !important; }
+.border-primary\/20 { border-color: rgba(var(--primary-rgb, 255, 107, 0), 0.2) !important; }
+.border-primary\/25 { border-color: rgba(var(--primary-rgb, 255, 107, 0), 0.25) !important; }
+.border-primary\/30 { border-color: rgba(var(--primary-rgb, 255, 107, 0), 0.3) !important; }
+.border-primary\/40 { border-color: rgba(var(--primary-rgb, 255, 107, 0), 0.4) !important; }
+.border-border\/40 { border-color: rgba(var(--border-rgb, 209, 206, 199), 0.4) !important; }
+.border-border\/50 { border-color: rgba(var(--border-rgb, 209, 206, 199), 0.5) !important; }
+.border-border\/60 { border-color: rgba(var(--border-rgb, 209, 206, 199), 0.6) !important; }
+.border-border\/70 { border-color: rgba(var(--border-rgb, 209, 206, 199), 0.7) !important; }
+.border-border\/80 { border-color: rgba(var(--border-rgb, 209, 206, 199), 0.8) !important; }
+.border-destructive\/20 { border-color: rgba(var(--destructive-rgb, 220, 38, 38), 0.2) !important; }
+.border-destructive\/25 { border-color: rgba(var(--destructive-rgb, 220, 38, 38), 0.25) !important; }
+.border-destructive\/30 { border-color: rgba(var(--destructive-rgb, 220, 38, 38), 0.3) !important; }
+
+.text-primary\/80 { color: rgba(var(--primary-rgb, 255, 107, 0), 0.8) !important; }
+.text-foreground\/60 { color: rgba(var(--foreground-rgb, 26, 26, 26), 0.6) !important; }
+.text-foreground\/70 { color: rgba(var(--foreground-rgb, 26, 26, 26), 0.7) !important; }
+.text-foreground\/80 { color: rgba(var(--foreground-rgb, 26, 26, 26), 0.8) !important; }
+.text-foreground\/90 { color: rgba(var(--foreground-rgb, 26, 26, 26), 0.9) !important; }
+.text-muted-foreground\/50 { color: rgba(102, 102, 102, 0.5) !important; }
+.text-muted-foreground\/80 { color: rgba(102, 102, 102, 0.8) !important; }
+.text-secondary-foreground\/50 { color: rgba(248, 247, 244, 0.5) !important; }
+.text-secondary-foreground\/70 { color: rgba(248, 247, 244, 0.7) !important; }
+.text-secondary-foreground\/75 { color: rgba(248, 247, 244, 0.75) !important; }
+.text-secondary-foreground\/80 { color: rgba(248, 247, 244, 0.8) !important; }
+
+.ring-primary\/20 { --tw-ring-color: rgba(var(--primary-rgb, 255, 107, 0), 0.2) !important; }
+.ring-primary\/30 { --tw-ring-color: rgba(var(--primary-rgb, 255, 107, 0), 0.3) !important; }
+.ring-white\/10 { --tw-ring-color: rgba(255, 255, 255, 0.1) !important; }
+.bg-white\/5 { background-color: rgba(255, 255, 255, 0.05) !important; }
+.bg-white\/6 { background-color: rgba(255, 255, 255, 0.06) !important; }
+.bg-white\/10 { background-color: rgba(255, 255, 255, 0.1) !important; }
+.bg-black\/10 { background-color: rgba(0, 0, 0, 0.1) !important; }
+.bg-black\/40 { background-color: rgba(0, 0, 0, 0.4) !important; }
+
+/* Prefer Arial/Segoe stack when next/font fails offline */
+body,
+button,
+input,
+select,
+textarea {
+  font-synthesis: none;
+}
+
+/* Skip link for keyboard a11y */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: #ff6b00;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 0 0 0.5rem 0;
+}
+.skip-to-content:focus {
+  left: 0;
+}
