@@ -10,7 +10,7 @@ import { PageHeader, StatCard } from "@/components/layout/PageHeader";
 
 export default async function OrdersPage() {
   const language = await getServerLanguage();
-  const orders = await getOrders();
+  const orders = await getOrders(100000);
 
   const active = orders.filter((o) => o.status === "Новый" || o.status === "В работе").length;
   const ready = orders.filter((o) => o.status === "Готов").length;
